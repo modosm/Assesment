@@ -17,7 +17,12 @@ pipeline {
 //                     docker build -t mmodos/helloapp:latest -mmodos/helloapp:${env.BUILD_ID} .'
 //                     docker push mmodos/helloapp:latest
 //                 '''
-                 docker.build("mmodos/helloapp:${env.BUILD_ID}")
+                 script{
+                    app = 'docker.build("mmodos/helloapp:${env.BUILD_ID}")'
+
+                    app.push("${env.BUILD_NUMBER}")
+                    app.push("latest")
+                 }
             }
         }
 
