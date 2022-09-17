@@ -12,17 +12,15 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building Docker image'
-                echo '$env'
 //                 sh '''
 //                     sudo apt install docker
 //                     docker build -t mmodos/helloapp:latest -mmodos/helloapp:${env.BUILD_ID} .'
 //                     docker push mmodos/helloapp:latest
 //                 '''
                  script{
-                    app = 'docker.build("mmodos/helloapp:${env.BUILD_ID}")'
+                    app = 'docker.build("mmodos/helloapp:latest")'
 
-                    app.push("${env.BUILD_NUMBER}")
-                    app.push("latest")
+                    app.push()
                  }
             }
         }
