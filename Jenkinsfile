@@ -14,6 +14,8 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
+                sh 'docker build -t mmodos/helloapp:v1 .'
+                sh 'docker push mmodos/helloapp:v1'
             }
         }
         stage('Test') {
