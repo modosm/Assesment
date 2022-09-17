@@ -13,7 +13,7 @@ pipeline {
             steps {
                 echo 'Building Docker image'
                 sh '''
-                    if ! command -v <the_command> &> /dev/null
+                    if ! command -v docker &> /dev/null
                     then
                         wget https://download.docker.com/mac/static/stable/x86_64/docker-20.10.9.tgz
                         tar xzvf /path/to/<FILE>.tar.gz
