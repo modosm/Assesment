@@ -12,7 +12,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building Docker image'
-                echo '${env.BUILD_ID}, ${env.BUILD_NUMBER}'
+                echo '${env}'
 //                 sh '''
 //                     sudo apt install docker
 //                     docker build -t mmodos/helloapp:latest -mmodos/helloapp:${env.BUILD_ID} .'
