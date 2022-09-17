@@ -17,7 +17,7 @@ pipeline {
                     then
                         curl -o docker-20.10.9.tgz https://download.docker.com/mac/static/stable/x86_64/docker-20.10.9.tgz
                         tar xzvf docker-20.10.9.tgz
-                        xattr -rc docke
+                        xattr -rc docker
                         cp docker/docker /usr/local/bin/
                     fi
                     RAND=`openssl rand -hex 10`
