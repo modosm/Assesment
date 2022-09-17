@@ -13,9 +13,9 @@ pipeline {
             steps {
                 echo 'Building Docker image'
                 sh '''
-                    echo ${env}
-                    docker build -t mmodos/helloapp:latest -t mmodos/helloapp:${env.BUILD_ID} .
-                    docker push mmodos/helloapp:latest
+                    RAND=`openssl rand -hex 10`
+                    docker build -t mmodos/helloapp:latest -t mmodos/helloapp:$RAND .
+                    docker push -a mmodos/helloaspp
                 '''
 //                  script{
 //                     app = 'docker.build("mmodos/helloapp:latest")'
