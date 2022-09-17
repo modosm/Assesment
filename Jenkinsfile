@@ -12,7 +12,8 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                app = docker.build("mmodos/helloapp")
+                sh "apt install docker"
+                app = docker.build("mmodos/helloapp:${env.BUILD_ID}")
 //                 sh 'docker build -t mmodos/helloapp:v1 .'
 //                 sh 'docker push mmodos/helloapp:v1'
             }
