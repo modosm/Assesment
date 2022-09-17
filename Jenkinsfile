@@ -22,7 +22,10 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                echo 'Deploying....'
+                echo 'Deploying Helm charts'
+                sh'''
+                    /usr/local/bin/helm install helloapp ./
+                '''
             }
         }
     }
