@@ -32,7 +32,7 @@ pipeline {
         }
         stage('Logs') {
             steps {
-                sh 'for pod in `kubectl get pods | awk "/helloapp/{print $1}"`;do;kubectl logs $pod;done'
+                sh 'for pod in `kubectl get pods | awk \'/helloapp/{print $1}\'`;do;kubectl logs $pod;done'
             }
         }
     }
