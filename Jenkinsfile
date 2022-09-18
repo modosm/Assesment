@@ -25,8 +25,14 @@ pipeline {
             steps {
                 echo 'Deploying Helm charts'
                 sh'''
-                    /usr/local/bin/helm install helloapp ./
+                    echo $USERNAME
+                    helm upgrade --install --set USERNAME=$USERNAME helloapp ./
                 '''
+            }
+        }
+        stage('Logs'){
+            steps {
+                sh 'for pod in `kubectl get pods | awk '/helloapp/{print $1}'`;do;kubectl logs $pod;done'
             }
         }
     }
