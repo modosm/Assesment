@@ -33,9 +33,9 @@ pipeline {
         stage('Logs') {
             steps {
                 sh '''
-                    for pod in `/usr/local/bin/kubectl get pods | awk '/helloapp/{print $1}'`
+                    for pod in `/usr/local/bin/kubectl get pods | /usr/bin/awk '/helloapp/{print $1}'`
                     do
-                        kubectl logs $pod
+                        /usr/local/bin/kubectl logs $pod
                     done
                 '''
             }
