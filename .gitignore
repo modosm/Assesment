@@ -127,3 +127,4 @@ dmypy.json
 # PyCharm IDE
 .idea
 templates.backup
+kube_config
