@@ -40,6 +40,13 @@ pipeline {
                 '''
             }
         }
+         stage('Delete charts') {
+            steps {
+                sh '''
+                    /usr/local/bin/helm uninstall helloapp
+                '''
+            }
+        }
     }
     post{
          always {
