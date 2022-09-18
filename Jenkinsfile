@@ -25,6 +25,7 @@ pipeline {
             steps {
                 echo 'Deploying Helm charts'
                 sh'''
+                    USERNAME="Jenkins"
                     echo $USERNAME
                     /usr/local/bin/helm upgrade --install --set username=$USERNAME helloapp ./
                 '''
