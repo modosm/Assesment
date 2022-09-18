@@ -35,14 +35,14 @@ pipeline {
             steps {
                 echo "Wait until the pod is deployed and finished running"
                 sleep(time: 30, unit: 'SECONDS')
-                echo "Save logs"
                 sh '''
-                    mkdir /Users/matemodos/.jenkins/artifacts/${BUILD_NUMBER}
                     for pod in `/usr/local/bin/kubectl get pods | /usr/bin/awk '/helloapp/{print $1}'`
                     do
-                        /usr/local/bin/kubectl logs $pod > /Users/matemodos/.jenkins/artifacts/${BUILD_NUMBER}/$pod.log
+                        /usr/local/bin/kubectl logs $pod > $pod.log
                     done
                 '''
+                echo 'Saving the artifact'
+                archiveArtifacts artifacts: '*.log'
             }
         }
     }
