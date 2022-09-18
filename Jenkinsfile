@@ -31,14 +31,16 @@ pipeline {
                 '''
             }
         }
-        stage('Logs') {
+        stage('Store logs in build artifacts') {
             steps {
                 echo "Wait until the pod is deployed and finished running"
                 sleep(time: 30, unit: 'SECONDS')
                 sh '''
+                    printenv
+                    mkdir /Users/matemodos/.jenkins/artifacts/${BUILD_NUMBER}
                     for pod in `/usr/local/bin/kubectl get pods | /usr/bin/awk '/helloapp/{print $1}'`
                     do
-                        /usr/local/bin/kubectl logs $pod
+                        /usr/local/bin/kubectl logs $pod > /Users/matemodos/.jenkins/artifacts/${BUILD_NUMBER}/logs_$pod.log
                     done
                 '''
             }
