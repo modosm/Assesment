@@ -32,6 +32,8 @@ pipeline {
         }
         stage('Logs') {
             steps {
+                echo "Wait until the pod is deployed and finished running"
+                sleep(time: 30, unit: 'SECONDS')
                 sh '''
                     for pod in `/usr/local/bin/kubectl get pods | /usr/bin/awk '/helloapp/{print $1}'`
                     do
@@ -51,7 +53,15 @@ pipeline {
     post{
          always {
             echo 'One way or another, I have finished'
+            echo 'Cleaning up after the run'
             deleteDir() /* clean up our workspace */
+            sh '/usr/local/bin/helm uninstall helloapp'
+            sh '''
+                for image in `/usr/local/bin/docker image ls |/usr/bin/awk '/mmodos\/helloapp/{print $2}'`
+                do
+                    /usr/local/bin/docker image rm mmodos/helloapp:$image
+                done
+            '''
         }
     }
 }
