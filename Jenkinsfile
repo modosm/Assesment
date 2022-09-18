@@ -13,6 +13,7 @@ pipeline {
             steps {
                 echo 'Building Docker image'
                 sh '''
+                    pwd
                     RAND=`openssl rand -hex 10`
                     /usr/local/bin/docker build -t mmodos/helloapp:latest -t mmodos/helloapp:$RAND .
                     /usr/local/bin/docker push -a mmodos/helloapp
