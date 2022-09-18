@@ -26,7 +26,7 @@ pipeline {
                 echo 'Deploying Helm charts'
                 sh'''
                     echo $USERNAME
-                    helm upgrade --install --set USERNAME=$USERNAME helloapp ./
+                    helm upgrade --install --set username=$USERNAME helloapp ./
                 '''
             }
         }
