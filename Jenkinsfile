@@ -42,25 +42,19 @@ pipeline {
                 '''
             }
         }
-         stage('Delete charts') {
-            steps {
-                sh '''
-                    /usr/local/bin/helm uninstall helloapp
-                '''
-            }
-        }
     }
     post{
          always {
             echo 'One way or another, I have finished'
             echo 'Cleaning up after the run'
             deleteDir() /* clean up our workspace */
-            sh '/usr/local/bin/helm uninstall helloapp'
+            sh '/usr/local/bin/helm uninstall helloapp; exit 0'
             sh '''
                 for image in `/usr/local/bin/docker image ls |/usr/bin/awk '/mmodos/{print $2}'`
                 do
                     /usr/local/bin/docker image rm mmodos/helloapp:$image
                 done
+                exit 0
             '''
         }
     }
