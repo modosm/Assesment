@@ -57,7 +57,7 @@ pipeline {
             deleteDir() /* clean up our workspace */
             sh '/usr/local/bin/helm uninstall helloapp'
             sh '''
-                for image in `/usr/local/bin/docker image ls |/usr/bin/awk '/mmodos\/helloapp/{print $2}'`
+                for image in `/usr/local/bin/docker image ls |/usr/bin/awk '/mmodos/{print $2}'`
                 do
                     /usr/local/bin/docker image rm mmodos/helloapp:$image
                 done
