@@ -26,7 +26,7 @@ pipeline {
                 echo 'Deploying Helm charts'
                 sh'''
                     echo $USERNAME
-                    helm upgrade --install --set username=$USERNAME helloapp ./
+                    /usr/local/bin/helm upgrade --install --set username=$USERNAME helloapp ./
                 '''
             }
         }
